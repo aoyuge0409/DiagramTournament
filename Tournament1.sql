@@ -90,3 +90,33 @@ GO
 EXEC Tournaments.ParticipantInsert 'Josh' , 'May 24 1980' ,'hello@gmail.com' ,'1234'
 
 SELECT * FROM Tournaments.Participant
+
+GO
+
+CREATE PROCEDURE Tournaments.ParticipantUpdate @ParticipantId int, @Name varchar(20), @BirthDate DATE, 
+@EmailAddress varchar(60), @Password varchar(20)
+AS
+
+UPDATE Tournaments.Participant
+SET NameId = @Name, BirthDate = @BirthDate, EmailAddress = @EmailAddress, ParticipantPassword = @Password
+WHERE ParticipantId = @ParticipantId;
+GO
+
+--to test if ot is working
+
+EXEC Tournaments.ParticipantUpdate 1, 'Josh' , 'May 20 1965' ,'hello@gmail.com' ,'1234'
+
+SELECT * FROM Tournaments.Participant
+
+GO
+
+CREATE PROCEDURE Tournaments.ParticipantDelete @ParticipantId int 
+AS
+DELETE FROM Tournaments.Participant
+WHERE ParticipantId = @ParticipantId;
+GO
+
+EXEC Tournaments.ParticipantDelete 1 
+
+SELECT * FROM Tournaments.Participant
+
