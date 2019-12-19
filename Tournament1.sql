@@ -43,3 +43,13 @@ CREATE TABLE Tournaments.Payment (
 	FOREIGN KEY (TournamentId) REFERENCES Tournaments.Tournament(TournamentId),
     FOREIGN KEY (ParticipantId) REFERENCES Tournaments.Participant(ParticipantId),
 );
+
+ALTER TABLE Tournaments.Payment
+add CONSTRAINT ConsPaymentDate -- random name using constraint in it
+DEFAULT GETDATE() for PaymentDate
+
+--Participantes must be 16 or older
+ALTER TABLE Tournaments.Participant --random name using birthday in it
+ADD CONSTRAINT CHK_BirthDate CHECK (GETDATE()-convert(DateTime, BirthDate) > = 16);
+GO  
+
