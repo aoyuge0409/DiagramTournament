@@ -53,3 +53,28 @@ ALTER TABLE Tournaments.Participant --random name using birthday in it
 ADD CONSTRAINT CHK_BirthDate CHECK (GETDATE()-convert(DateTime, BirthDate) > = 16);
 GO  
 
+-- FUNCTIONS
+
+CREATE FUNCTION Tournaments.FormatDate -- random name for function for specific format required
+(	@Date DATE
+)
+RETURNS varchar (50) --cuz numbers and letters
+WITH RETURNS NULL ON NULL INPUT, 
+	SCHEMABINDING 
+AS
+	BEGIN -- insert logic between Begin and End
+		DECLARE @OutputMonth varchar (100)
+		DECLARE @OutputDay varchar (20)
+		DECLARE @OutputYear VARCHAR (15)
+		SELECT @OutputMonth = FORMAT(@DATE,'MMMM')
+		SELECT @OutputDay = DAY(@DATE)
+		SELECT @OutputYear = YEAR(@DATE)
+		RETURN @OutputMonth +' '+ @OutputDay +' '+ @OutputYear
+			END;
+	GO
+
+
+	
+
+	SELECT TOURNAMENTS.FormatDate (GETDATE())
+	
