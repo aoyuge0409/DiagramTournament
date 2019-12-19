@@ -73,8 +73,20 @@ AS
 			END;
 	GO
 
-
-	
+	--store procedure
 
 	SELECT TOURNAMENTS.FormatDate (GETDATE())
-	
+
+	GO
+
+	CREATE PROCEDURE Tournaments.ParticipantInsert @Name varchar(20), @BirthDate DATE, 
+@EmailAddress varchar(60), @Password varchar(20)
+AS
+
+INSERT INTO Tournaments.Participant(NameId, BirthDate, EmailAddress, ParticipantPassword)
+VALUES (@Name, @BirthDate, @EmailAddress, @Password);
+GO
+
+EXEC Tournaments.ParticipantInsert 'Josh' , 'May 24 1980' ,'hello@gmail.com' ,'1234'
+
+SELECT * FROM Tournaments.Participant
