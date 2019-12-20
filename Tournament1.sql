@@ -102,7 +102,7 @@ SET NameId = @Name, BirthDate = @BirthDate, EmailAddress = @EmailAddress, Partic
 WHERE ParticipantId = @ParticipantId;
 GO
 
---to test if ot is working
+--to test if it is working
 
 EXEC Tournaments.ParticipantUpdate 1, 'Josh' , 'May 20 1965' ,'hello@gmail.com' ,'1234'
 
